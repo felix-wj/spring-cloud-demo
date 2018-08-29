@@ -7,5 +7,5 @@
 ## 执行顺序
 - 同一个切面内的方法 @Around->@Before->@Around->@After->@AfterReturning
 - 不同的切面，通过类上的@Order注解设置优先级，数值越大，优先级越低。默认值为Integer.MAX_VALUE。
-## 注解
+## 切面注解
 不再通过类名方法名指定切面，但是需要在具体方法上使用注解指定切面。
