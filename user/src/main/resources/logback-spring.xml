@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--设置log4j2的自身log级别为warn-->
+
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <property name="logback.logdir" value="/logs/cloud-demo-user/log"/>
     <property name="logback.appname" value="cloud-demo-user"/>
