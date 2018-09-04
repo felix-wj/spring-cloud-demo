@@ -26,3 +26,8 @@ spring:
         enabled: true
 server:
   port: 20001
+
+
+
+psw: ENC(NaiB4wGhkI2c+C9+LgrFAQ==)
+

@@ -73,11 +73,13 @@ public class LogAspect {
         Object returnValue = point.proceed(args);
         log.info("@Around方法执行之后");
         log.info("@Around被织入的目标对象为：{}", point.getTarget());
-        ((User) returnValue).setAge(12);
+        log.info("执行结果为：{}",returnValue);
+        //修改结果
+   /*     ((User) returnValue).setAge(12);
         User user = new User();
         user.setId(3);
-        user.setName("张三-doAfter");
-        return user;
+        user.setName("张三-doAfter");*/
+        return returnValue;
     }
 
 
@@ -121,7 +123,7 @@ public class LogAspect {
 
         log.info("@AfterReturning：被织入的目标对象为：" + point.getTarget());
         //修改返回数据 有效
-        ((User) returnValue).setAge(18);
+        //((User) returnValue).setAge(18);
 
 
 

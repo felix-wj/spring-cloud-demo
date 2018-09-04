@@ -15,6 +15,7 @@
         <module>user</module>
         <module>movie</module>
         <module>hystrix</module>
+        <module>config</module>
     </modules>
 
     <parent>

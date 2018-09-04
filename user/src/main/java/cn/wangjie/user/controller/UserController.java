@@ -3,6 +3,7 @@ package cn.wangjie.user.controller;
 import cn.wangjie.user.aspect.annotation.LogAnnotation;
 import cn.wangjie.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class UserController {
 
+    @Value("${psw}")
+    private String psw;
     @Autowired
     private RestTemplate restTemplate;
     @LogAnnotation(note = "getUser")
@@ -25,7 +28,7 @@ public class UserController {
     public User getUser(@PathVariable("id") Integer id){
         User user = new User();
         user.setId(id);
-        user.setName("张三");
+        user.setName(psw);
         user.setAge(20);
         return user;
     }
