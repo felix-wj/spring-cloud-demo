@@ -12,3 +12,6 @@
 
 ## jasypt对配置文件进行加解密
 https://blog.csdn.net/more_try/article/details/82389532
+
+## 配置文件动态刷新
+

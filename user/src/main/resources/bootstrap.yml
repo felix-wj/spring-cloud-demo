@@ -16,18 +16,33 @@ eureka:
       #defaultZone: http://admin:123456@118.25.87.131:${eureka.port:20000}/eureka/
       defaultZone: http://admin:123456@${eureka.host:localhost}:${eureka.port:20000}/eureka/
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbit
+    password: 123456
   # 服务名
   application:
-    name: user-local
+    name: spring-cloud
   cloud:
     loadbalancer:
       # 开启重试机制
       retry:
         enabled: true
+    config:
+      profile: config
+      label: master
+      username: admin
+      password: 123456
+      fail-fast: true
+      discovery:
+        enabled: true
+        serviceId: spring-cloud-demo-config-server
 server:
   port: 20001
+management:
+  security:
+    enabled: false
 
 
-
-psw: ENC(NaiB4wGhkI2c+C9+LgrFAQ==)
 
