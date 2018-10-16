@@ -5,10 +5,11 @@ server:
 
 spring:
   rabbitmq:
-    host: localhost
+    host: 118.25.87.131
     port: 5672
-    username: rabbit
-    password: 123456
+    username: wangjie
+    password: ENC(h0BQetxrh2zZ19UUMeUVrq3LTUS65uwn)
+    virtual-host: /
   application:
     name: spring-cloud-demo-config-server
   security:
@@ -26,7 +27,7 @@ spring:
           # 仓库路径下的相对搜索位置
           search-paths: /**
           # git仓库的用户名
-          username: ENC(cKQpBNihP6+ruxSw+UkVWQ==)
+          username: wj_zjut
           # git仓库的用户密码
           password: ENC(7t2dV4Go8cu5u2B8yB49YoTzGzPQdF7X)
 
