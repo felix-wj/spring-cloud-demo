@@ -24,7 +24,7 @@ spring:
     virtual-host: /
   # 服务名
   application:
-    name: spring-cloud
+    name: spring-cloud-user
   cloud:
     loadbalancer:
       # 开启重试机制
