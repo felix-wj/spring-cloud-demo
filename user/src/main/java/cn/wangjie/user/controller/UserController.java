@@ -25,6 +25,8 @@ public class UserController {
     private String psw;
     @Value("${name}")
     private String name;
+    @Value("${server.port}")
+    private Integer port;
     @Autowired
     private RestTemplate restTemplate;
     @LogAnnotation(note = "getUser")
@@ -33,15 +35,7 @@ public class UserController {
         User user = new User();
         user.setId(id);
         user.setName(name);
-        user.setAge(20);
+        user.setAge(port);
         return user;
-    }
-    @GetMapping("/actuator/info")
-    public String getInfo(){
-        User user = new User();
-        user.setId(1);
-        user.setName("张三");
-        user.setAge(20);
-        return "tttttt";
     }
 }

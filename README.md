@@ -38,3 +38,56 @@ spring:
 在类上加注解@RefreshScope，允许该类引入的属性动态刷新。
 当配置变化后，通过ip:port/actuator/bus-refresh刷新相关项目的配置。注意ip和port为需要更新配置的项目的地址。
 
+## ribbon配置
+在引入eureka的包时已经引入了ribbon的start包。
+直接在RestTemplate上加@LoadBalanced注解
+```java
+public class MovieApplication {
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+   
+    public static void main(String[] args) {
+        SpringApplication.run(MovieApplication.class, args);
+    }
+}
+```
+调用服务接口
+```java
+public class UserController {
+
+    @Autowired
+    private RestTemplate restTemplate;
+    @GetMapping("/user/get/{id}")
+    public User getUser(@PathVariable("id") Integer id){
+        return  this.restTemplate.getForObject("http://spring-cloud-user/user/get/"+id,User.class);
+    }
+
+}
+```
+### 配置随机均衡策略
+```java
+@Configuration
+public class RobbinConfig {
+
+    @Bean
+    public IRule ribbonRule(){
+        return new RandomRule();
+    }
+}
+```
+此处需注意RobbinConfig类不能被自动扫描到，否则会覆盖所有服务的均衡策略。
+即放在启动类同目录或子包下需要指定配置类不被扫描。在启动类上加入以下注解。并在配置类上加入自定义注解。
+```java
+//规定带某种自定义注解的类不被扫描
+@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = ExcludeFromComponentScan.class)})
+```
+在启动类上加入注解，指定均很策略适用于那个服务。
+```java
+@RibbonClient(name = "spring-cloud-user", configuration = RobbinConfig.class);
+```
+
+

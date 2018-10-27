@@ -40,7 +40,7 @@ spring:
         enabled: true
         serviceId: spring-cloud-demo-config-server
 server:
-  port: 20001
+  port: 20012
 
 management:
   endpoints:
