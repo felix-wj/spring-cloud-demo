@@ -1,13 +1,14 @@
 package cn.wangjie.user.controller;
 
 import cn.wangjie.user.aspect.annotation.LogAnnotation;
+import cn.wangjie.user.entity.Movie;
 import cn.wangjie.user.entity.User;
+import cn.wangjie.user.feignclient.MovieFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,6 +30,8 @@ public class UserController {
     private Integer port;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private MovieFeignClient movieFeignClient;
     @LogAnnotation(note = "getUser")
     @GetMapping("/user/get/{id}")
     public User getUser(@PathVariable("id") Integer id){
@@ -38,4 +41,13 @@ public class UserController {
         user.setAge(port);
         return user;
     }
+
+
+    @LogAnnotation(note = "getMovie")
+    @GetMapping("/movie/get/{id}")
+    public Movie getMovie(@PathVariable("id") Integer id){
+
+        return movieFeignClient.getMovie(id);
+    }
+
 }

@@ -146,7 +146,7 @@ management:
 ```
 访问url为ip:port/actuator/hystrix.stream
 
-###配置断路器UI界面
+### 配置断路器UI界面
 新建一个工程，导入jar包
 ```xml
         <dependency>
@@ -157,3 +157,38 @@ management:
 启动类加入注解@EnableHystrixDashboard，启动项目。
 在界面中输入其他项目的hystrix.stream。例如http://localhost:20002/actuator/hystrix.stream，即可监控该项目。
 
+### 部署turbine显示注册到eureka上的服务集群的接口调用情况
+新建一个工程，导入jar包
+```xml
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-turbine</artifactId>
+        </dependency>
+```
+将项目注册到eureka。
+配置获取hystrix.stream的应用
+```yaml
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: movie,spring-cloud-user
+  cluster-name-expression: "'default'"
+```
+在appConfig中加入服务名即可。
+
+启动类加上@EnableTurbine注解，启动项目。
+启动hystrix项目，输入turbine项目的id:port/turbine.stream?cluster=default即可。
