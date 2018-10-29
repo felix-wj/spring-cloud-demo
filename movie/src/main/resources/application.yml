@@ -29,8 +29,15 @@ spring:
       retry:
         enabled: true
 
-
 spring-cloud-user:
   ribbon:
     #应实施的rule
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ZoneAvoidanceRule
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream,health,info
+feign:
+  hystrix:
+    enabled: true

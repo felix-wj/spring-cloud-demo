@@ -26,6 +26,7 @@
     </properties>
 
     <dependencies>
+        <!--断路器UI-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>

@@ -1,7 +1,2 @@
 server:
   port: 20003
-endpoints:
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true

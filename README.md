@@ -15,7 +15,7 @@ https://blog.csdn.net/more_try/article/details/82389532
 
 ## 配置文件动态刷新
 maven引入jar包
-```pom
+```xml
   <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-bus-amqp</artifactId>
@@ -38,7 +38,7 @@ spring:
 在类上加注解@RefreshScope，允许该类引入的属性动态刷新。
 当配置变化后，通过ip:port/actuator/bus-refresh刷新相关项目的配置。注意ip和port为需要更新配置的项目的地址。
 
-## ribbon配置
+## ribbon 服务端负载均衡配置
 在引入eureka的包时已经引入了ribbon的start包。
 直接在RestTemplate上加@LoadBalanced注解
 ```java
@@ -90,4 +90,70 @@ public class RobbinConfig {
 @RibbonClient(name = "spring-cloud-user", configuration = RobbinConfig.class);
 ```
 
+## feign 使用REST风格调用服务
+首先引入jar包
+```xml
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+```
+之后开始创建api调用接口。
+```java
+@FeignClient(name = "spring-cloud-user" , fallback = UserFeignClientFallback.class)
+public interface UserFeignClient {
+    @RequestMapping(value = "/user/get/{id}",method = RequestMethod.GET)
+    User getUser(@PathVariable("id") Integer id);
+}
+```
+fallback指定断路情况下返回的数据,实现相对应的接口方法，可以进行服务降级等操作。
+```java
+@Component
+public class UserFeignClientFallback implements UserFeignClient {
+    @Override
+    public User getUser(Integer id) {
+        User user = new User();
+        user.setId(id);
+        user.setName("feign fallback");
+        return user;
+    }
+}
+```
+需要在配置文件中指定开启feign的hystrix支持才能生效。
+```yaml
+feign:
+  hystrix:
+    enabled: true
+```
+
+## hystrix 断路器
+引入jar包
+```xml
+        <!--断路器-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+```
+配置文件添加web访问点
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+```
+访问url为ip:port/actuator/hystrix.stream
+
+###配置断路器UI界面
+新建一个工程，导入jar包
+```xml
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+```
+启动类加入注解@EnableHystrixDashboard，启动项目。
+在界面中输入其他项目的hystrix.stream。例如http://localhost:20002/actuator/hystrix.stream，即可监控该项目。
 
