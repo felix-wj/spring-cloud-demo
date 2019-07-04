@@ -8,7 +8,7 @@ spring:
     host: 118.25.87.131
     port: 5672
     username: wangjie
-    password: ENC(h0BQetxrh2zZ19UUMeUVrq3LTUS65uwn)
+    password: ENC(z7plwK3pw298dm5OYesIF25uGUlSkYOt)
     virtual-host: /
   application:
     name: spring-cloud-demo-config-server
