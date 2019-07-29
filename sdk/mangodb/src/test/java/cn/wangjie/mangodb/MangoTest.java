@@ -1,0 +1,76 @@
+package cn.wangjie.mangodb;
+
+import cn.wangjie.mangodb.model.UserModel;
+import com.alibaba.fastjson.JSON;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.operation.UpdateOperation;
+import org.bson.Document;
+import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.test.context.junit4.SpringRunner;
+
+/**
+ * @program: demo
+ * @description:
+ * @author: WangJie
+ * @create: 2019-07-29 11:29
+ **/
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class MangoTest {
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Test
+    public void connectTest(){
+        mongoTemplate.getCollection("user").find();
+    }
+    @Test
+    public void insertTest(){
+        UserModel userModel = UserModel.builder().createTime(System.currentTimeMillis()).name("张三").uid(1).build();
+        mongoTemplate.insert(userModel);
+    }
+    @Test
+    public void findTest(){
+        Query query = Query.query(Criteria.where("uid").is(1));
+        UserModel userModel = mongoTemplate.findOne(query,UserModel.class);
+        System.out.println(userModel);
+
+    }
+    @Test
+    public void findTest2(){
+        Document document = new Document();
+        document.put("uid",1);
+        FindIterable<Document> findIterable =mongoTemplate.getCollection("user").find(document);
+        document = findIterable.first();
+/*        UserModel model = null;
+        String json = document.toJson();
+        System.out.println(json);
+        model = JSON.parseObject(json,UserModel.class);*/
+        UserModel model = mongoTemplate.getConverter().read(UserModel.class,document);
+        System.out.println(model);
+    }
+    @Test
+    public void documentTest(){
+        Document document = new Document();
+        document.put("time",1234567L);
+        System.out.println(document.toJson());
+    }
+    @Test
+    public void updateTest(){
+
+    }
+    @Test
+    public void upsertTest(){
+        UserModel userModel2 = UserModel.builder().createTime(System.currentTimeMillis()).name("李四").uid(2).build();
+
+    }
+}
