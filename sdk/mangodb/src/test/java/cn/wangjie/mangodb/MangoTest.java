@@ -1,12 +1,9 @@
 package cn.wangjie.mangodb;
 
 import cn.wangjie.mangodb.model.UserModel;
-import com.alibaba.fastjson.JSON;
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.operation.UpdateOperation;
+import com.mongodb.client.result.DeleteResult;
 import org.bson.Document;
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +63,25 @@ public class MangoTest {
     }
     @Test
     public void updateTest(){
-
+        Query query = new Query(Criteria.where("uid").is(1));
+        Update update = new Update();
+        update.set("name","张三2");
+        mongoTemplate.updateMulti(query,update,UserModel.class);
     }
     @Test
     public void upsertTest(){
-        UserModel userModel2 = UserModel.builder().createTime(System.currentTimeMillis()).name("李四").uid(2).build();
-
+        Query query = new Query(Criteria.where("uid").is(2).andOperator(Criteria.where("name").is("张三2")));
+        Update update = new Update();
+        update.set("name","张三6");
+        mongoTemplate.updateMulti(query,update,UserModel.class);
+        mongoTemplate.upsert(query,update,UserModel.class);
+    }
+    @Test
+    public void deleteTest(){
+        UserModel userModel = UserModel.builder().uid(1).name("张三6").build();
+        Query query = new Query(Criteria.where("uid").is(1));
+        DeleteResult result = mongoTemplate.remove(query,UserModel.class);
+        result = mongoTemplate.remove(userModel);
+        System.out.println(result.getDeletedCount());
     }
 }
