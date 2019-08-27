@@ -4,13 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.wangjie</groupId>
-        <artifactId>demo</artifactId>
+        <artifactId>sdk-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.wangjie</groupId>
-    <artifactId>sdk-parent</artifactId>
+    <artifactId>mongodb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sdk-parent</name>
+    <name>sdk-mongodb</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -20,20 +21,20 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <modules>
-        <module>mongodb</module>
-        <module>elasticsearch</module>
-        <module>mq</module>
-    </modules>
 
     <build>
         <plugins>
