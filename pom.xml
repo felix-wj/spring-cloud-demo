@@ -18,6 +18,7 @@
         <module>config</module>
         <module>turbine</module>
         <module>sdk</module>
+        <module>mybatis-generator</module>
     </modules>
 
     <parent>
@@ -69,6 +70,8 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.22</version>
         </dependency>
+
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>

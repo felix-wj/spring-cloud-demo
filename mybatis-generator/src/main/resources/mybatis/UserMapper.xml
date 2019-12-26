@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wangjie.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.wangjie.domain.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="ID" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="Pic" jdbcType="VARCHAR" property="pic" />
+    <result column="UserName" jdbcType="VARCHAR" property="userName" />
+    <result column="TrueName" jdbcType="VARCHAR" property="trueName" />
+    <result column="Intro" jdbcType="VARCHAR" property="intro" />
+    <result column="NewIntro" jdbcType="VARCHAR" property="newIntro" />
+    <result column="Sex" jdbcType="TINYINT" property="sex" />
+    <result column="BirthYear" jdbcType="INTEGER" property="birthYear" />
+    <result column="BirthProvince" jdbcType="VARCHAR" property="birthProvince" />
+    <result column="BirthCity" jdbcType="VARCHAR" property="birthCity" />
+    <result column="LiveProvince" jdbcType="VARCHAR" property="liveProvince" />
+    <result column="LiveCity" jdbcType="VARCHAR" property="liveCity" />
+    <result column="Blood" jdbcType="INTEGER" property="blood" />
+    <result column="QQ" jdbcType="VARCHAR" property="QQ" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="Mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="Address" jdbcType="VARCHAR" property="address" />
+    <result column="AddTime" jdbcType="INTEGER" property="addTime" />
+    <result column="Commend" jdbcType="BIT" property="commend" />
+    <result column="CommendTime" jdbcType="INTEGER" property="commendTime" />
+    <result column="LastLoginTime" jdbcType="INTEGER" property="lastLoginTime" />
+    <result column="SpaceTemplate" jdbcType="VARCHAR" property="spaceTemplate" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="gid" jdbcType="SMALLINT" property="gid" />
+    <result column="update_at" jdbcType="TIMESTAMP" property="update_at" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="inforpercent" jdbcType="INTEGER" property="inforpercent" />
+    <result column="remember_token" jdbcType="VARCHAR" property="remember_token" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+    <result column="revenue" jdbcType="VARCHAR" property="revenue" />
+    <result column="birthmonth" jdbcType="TINYINT" property="birthmonth" />
+    <result column="birthday" jdbcType="TINYINT" property="birthday" />
+    <result column="groupid" jdbcType="SMALLINT" property="groupid" />
+    <result column="vip_level" jdbcType="SMALLINT" property="vip_level" />
+    <result column="extgroupids" jdbcType="CHAR" property="extgroupids" />
+    <result column="credits" jdbcType="INTEGER" property="credits" />
+    <result column="exp" jdbcType="INTEGER" property="exp" />
+    <result column="golds1" jdbcType="INTEGER" property="golds1" />
+    <result column="purchases" jdbcType="DECIMAL" property="purchases" />
+    <result column="vip_expiration" jdbcType="INTEGER" property="vip_expiration" />
+    <result column="golds" jdbcType="DECIMAL" property="golds" />
+    <result column="app_bg_pic" jdbcType="VARCHAR" property="app_bg_pic" />
+  </resultMap>
+</mapper>

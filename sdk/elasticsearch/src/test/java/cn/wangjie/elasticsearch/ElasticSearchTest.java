@@ -4,6 +4,9 @@ import cn.wangjie.elasticsearch.model.EmployeeModel;
 import cn.wangjie.elasticsearch.repository.EmployeeESRepository;
 import com.alibaba.fastjson.JSON;
 import org.elasticsearch.action.ActionFuture;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeAction;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequestBuilder;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -58,10 +61,6 @@ public class ElasticSearchTest {
                 System.out.println(JSON.toJSONString(map));
             }
         }
-     /*   List<Map<String,Object>> result = employeeESRepository.getEmp("rock climbing",30);
-        for (Map map:result){
-            System.out.println(JSON.toJSONString(map));
-        }*/
     }
 
     @Test
@@ -70,5 +69,17 @@ public class ElasticSearchTest {
         for (EmployeeModel employeeModel:list){
             System.out.println(employeeModel.toString());
         }
+    }
+
+    @Test
+    public void testTokenizer(){
+        String index = "my_index";
+        String text = "莫忘记，人类情感上最大的需要是感恩。";
+        AnalyzeRequestBuilder analyzeRequestBuilder = new AnalyzeRequestBuilder(esTemplate.getClient(), AnalyzeAction.INSTANCE).setTokenizer("icu_tokenizer").setText(text);
+
+        List<AnalyzeResponse.AnalyzeToken> tokenList = analyzeRequestBuilder.execute().actionGet().getTokens();
+        tokenList.forEach(ikToken -> {
+            System.out.println(ikToken.getTerm());
+        });
     }
 }

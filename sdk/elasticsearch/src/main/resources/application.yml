@@ -1,0 +1,6 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes:
+      repositories:
+        enabled: true
