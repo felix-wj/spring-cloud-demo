@@ -67,7 +67,5 @@ public class SimpleTest {
         label.setX(1D);
         label.setY(2D);
         labels.add(label);
-
-        label
     }
 }

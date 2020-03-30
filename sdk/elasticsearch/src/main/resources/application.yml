@@ -1,6 +1,6 @@
 spring:
   data:
     elasticsearch:
-      cluster-nodes:
+      cluster-nodes: 188.131.136.36:9300
       repositories:
         enabled: true

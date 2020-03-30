@@ -129,7 +129,7 @@ public class MongoTest {
         query.addCriteria(Criteria.where("type").is(1))
                 .addCriteria(Criteria.where("status").is("normal"))
                 .addCriteria(Criteria.where("_id").gt(new ObjectId("599415cbd0717ba31450d592")));
-        // query.with(Sort.by(new Sort.Order(Sort.Direction.ASC,"time"))).limit(4);
+         query.with(Sort.by(new Sort.Order(Sort.Direction.ASC,"time"))).limit(4);
         System.out.println(query.getQueryObject().toJson());
         Iterable<Document> iterable = mongoTemplate.getCollection("app_discover_count_new").find(query.getQueryObject()).limit(4);
         iterable.forEach(document -> {
