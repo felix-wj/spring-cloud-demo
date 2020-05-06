@@ -30,7 +30,12 @@ spring:
           username: wj_zjut
           # git仓库的用户密码
           password: ENC(7t2dV4Go8cu5u2B8yB49YoTzGzPQdF7X)
-
+  boot:
+    admin:
+      client:
+        url: http://${eureka_server}:20006
+        instance:
+          service-base-url: http://${eureka_server}:20006
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
@@ -51,4 +56,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: bus-refresh
+        include: "*"

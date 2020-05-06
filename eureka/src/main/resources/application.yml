@@ -9,9 +9,8 @@ spring:
       password: 123456
   boot:
     admin:
-      context-path: /boot
       client:
-        url: http://${eureka.instance.hostname}:6001/boot
+        url: http://${eureka_server}:20006
 server:
   port: 20000
 
@@ -33,3 +32,11 @@ eureka:
     enable-self-preservation: false
     # 清理无效节点的时间间隔（单位毫秒，默认是60*1000）
     eviction-interval-timer-in-ms: 30000
+
+eureka_server: @mvnEurekaServer@
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
