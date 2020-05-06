@@ -82,6 +82,57 @@
         </dependency>
     </dependencies>
 
+
+
+    <profiles>
+        <!-- 本地环境 -->
+        <profile>
+            <id>local</id>
+            <!-- 默认激活 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mvnConfigcenterUrl>localhost</mvnConfigcenterUrl>
+                <mvnEurekaServer>localhost</mvnEurekaServer>
+                <mvnProfile>local</mvnProfile>
+            </properties>
+        </profile>
+
+        <!-- 测试环境 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <mvnConfigcenterUrl>192.168.22.172</mvnConfigcenterUrl>
+                <mvnEurekaServer>192.168.22.105</mvnEurekaServer>
+                <mvnProfile>dev</mvnProfile>
+            </properties>
+        </profile>
+
+        <!-- 生产环境 -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <mvnConfigcenterUrl>10.10.0.11</mvnConfigcenterUrl>
+                <mvnEurekaServer>10.10.0.6</mvnEurekaServer>
+                <mvnlogLevel>error</mvnlogLevel>
+                <mvnProfile>prod</mvnProfile>
+            </properties>
+        </profile>
+
+        <!-- 预发环境 -->
+        <profile>
+            <id>pre</id>
+            <properties>
+                <mvnConfigcenterUrl>10.10.0.11</mvnConfigcenterUrl>
+                <mvnEurekaServer>10.10.0.6</mvnEurekaServer>
+                <mvnlogLevel>info</mvnlogLevel>
+                <mvnProfile>pre</mvnProfile>
+            </properties>
+        </profile>
+    </profiles>
+
+
     <build>
         <plugins>
             <plugin>

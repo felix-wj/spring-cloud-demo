@@ -7,6 +7,11 @@ spring:
       name: admin
     # 认证使用的密码
       password: 123456
+  boot:
+    admin:
+      context-path: /boot
+      client:
+        url: http://${eureka.instance.hostname}:6001/boot
 server:
   port: 20000
 
