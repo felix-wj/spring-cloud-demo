@@ -1,6 +1,7 @@
 package cn.wangjie.user.controller;
 
 import cn.wangjie.user.aspect.annotation.LogAnnotation;
+import cn.wangjie.user.config.DataConfig;
 import cn.wangjie.user.entity.Movie;
 import cn.wangjie.user.entity.User;
 import cn.wangjie.user.feignclient.MovieFeignClient;
@@ -22,24 +23,25 @@ import org.springframework.web.client.RestTemplate;
 @RefreshScope
 public class UserController {
 
-    @Value("${psw}")
-    private String psw;
-    @Value("${name}")
-    private String name;
     @Value("${server.port}")
     private Integer port;
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
     private MovieFeignClient movieFeignClient;
+    @Autowired
+    private DataConfig dataConfig;
     @LogAnnotation(note = "getUser")
     @GetMapping("/user/get/{id}")
     public User getUser(@PathVariable("id") Integer id){
         User user = new User();
         user.setId(id);
-        user.setName(name);
         user.setAge(port);
         return user;
+    }
+    @GetMapping("/show")
+    public DataConfig show(){
+        return dataConfig;
     }
 
 

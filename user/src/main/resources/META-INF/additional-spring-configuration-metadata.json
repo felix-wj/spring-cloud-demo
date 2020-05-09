@@ -1,0 +1,20 @@
+{
+  "properties": [
+    {
+      "name": "data.env",
+      "type": "java.lang.String",
+      "description": "环境变量.",
+      "defaultValue": "dev"
+    },
+    {
+      "name": "data.user.username",
+      "type": "java.lang.String",
+      "description": "用户名."
+    },
+    {
+      "name": "data.user.password",
+      "type": "java.lang.String",
+      "description": "密码."
+    }
+  ]
+}

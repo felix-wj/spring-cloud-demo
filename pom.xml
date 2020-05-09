@@ -20,6 +20,7 @@
         <module>sdk</module>
         <module>mybatis-generator</module>
         <module>websocket</module>
+        <module>admin</module>
     </modules>
 
     <parent>
@@ -73,7 +74,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -83,15 +83,11 @@
     </dependencies>
 
 
-
     <profiles>
         <!-- 本地环境 -->
         <profile>
             <id>local</id>
-            <!-- 默认激活 -->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
             <properties>
                 <mvnConfigcenterUrl>localhost</mvnConfigcenterUrl>
                 <mvnEurekaServer>localhost</mvnEurekaServer>
@@ -102,9 +98,13 @@
         <!-- 测试环境 -->
         <profile>
             <id>dev</id>
+            <!-- 默认激活 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
-                <mvnConfigcenterUrl>192.168.22.172</mvnConfigcenterUrl>
-                <mvnEurekaServer>192.168.22.105</mvnEurekaServer>
+                <mvnConfigcenterUrl>localhost</mvnConfigcenterUrl>
+                <mvnEurekaServer>localhost</mvnEurekaServer>
                 <mvnProfile>dev</mvnProfile>
             </properties>
         </profile>
@@ -159,6 +159,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 

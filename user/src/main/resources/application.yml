@@ -1,0 +1,5 @@
+data:
+  user:
+    #username: application.yml配置
+    password: application.yml配置
+  env: application.yml配置
