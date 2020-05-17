@@ -33,6 +33,7 @@
         <module>mongodb</module>
         <module>elasticsearch</module>
         <module>mq</module>
+        <module>redis-cluster</module>
     </modules>
 
     <build>
