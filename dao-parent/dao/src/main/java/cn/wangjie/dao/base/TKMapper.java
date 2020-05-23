@@ -14,7 +14,7 @@ import tk.mybatis.mapper.common.special.InsertUseGeneratedKeysMapper;
  * 2018.11.12 增加 CustomSelectExampleMapper selectByExample 方法时字段为关键字时报错
  * @date 2018/7/2
  */
-public interface IMyMapper<T> extends
+public interface TKMapper<T> extends
         Mapper<T>,
         IdsMapper<T>,
         InsertListMapper<T>,

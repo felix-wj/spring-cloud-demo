@@ -48,7 +48,6 @@ spring:
 
 
 
-
 user:
   ribbon:
     #应实施的rule
@@ -70,3 +69,4 @@ data:
     username: bootstrap.yml配置
     password: bootstrap.yml配置
   env: bootstrap.yml配置
+

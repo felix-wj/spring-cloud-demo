@@ -9,11 +9,11 @@ import java.util.Properties;
 
 public class DataSourceConfigurer {
 
-    public static final String DB_PPS = "paperPushSystem";
-    public static final String DB_PM = "propertyManagement";
+    public static final String DB_PPS = "paperpushsystem";
+    public static final String DB_PM = "propertymanagement";
 
 
-    public static final String PPS_TRANSACTION_MANAGER = "paperPushSystemTransactionManager";
+    public static final String PPS_TRANSACTION_MANAGER = "paperpushsystemTransactionManager";
     public static final String PM_TRANSACTION_MANAGER = "propertyManagementTransactionManager";
 
     public static void setPlugins(SqlSessionFactoryBean sqlSessionFactoryBean) {
@@ -34,7 +34,7 @@ public class DataSourceConfigurer {
         mapperScannerConfigurer.setBasePackage("cn.wangjie.dao.mapper." + db);
         //配置通用mappers
         Properties properties = new Properties();
-        properties.setProperty("mappers", "cn.wangjie.dao.base.IMyMapper");
+        properties.setProperty("mappers", "tk.mybatis.mapper.common.Mapper");
         properties.setProperty("notEmpty", "false");
         properties.setProperty("IDENTITY", "MYSQL");
         mapperScannerConfigurer.setProperties(properties);

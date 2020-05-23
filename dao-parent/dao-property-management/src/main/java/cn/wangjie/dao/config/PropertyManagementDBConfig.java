@@ -9,66 +9,53 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
-import javax.naming.Name;
 import javax.sql.DataSource;
 
-/**
- * @program: spring-cloud-demo
- * @description:
- * @author: WangJie
- * @create: 2020-05-17 17:36
- **/
 @Data
-@ConditionalOnProperty(name = "spring.datasource.druid.paperpushsystem.url", matchIfMissing = false)
 @org.springframework.context.annotation.Configuration
-public class PaperPushSystemDBConfig extends DataSourceConfigurer {
+@ConditionalOnProperty(name = "spring.datasource.druid.propertymanagement.url", matchIfMissing = false)
+public class PropertyManagementDBConfig extends DataSourceConfigurer {
 
-    @Bean(name = DB_PPS)
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.druid.paperpushsystem")
-    public DataSource paperPushSystemDataSource() {
+    @Bean(name = DB_PM)
+    @ConfigurationProperties(prefix ="spring.datasource.druid.propertymanagement")
+    DataSource dataSource(){
         return new DruidDataSource();
     }
 
     @Bean
-    public Configuration paperPushSystemConfiguration() {
+    public Configuration configuration() {
         Configuration configuration = new Configuration();
         //开启驼峰
         configuration.setMapUnderscoreToCamelCase(true);
         return configuration;
     }
-
-    @Bean(DB_PPS+"SqlSessionFactory")
-    @Primary
-    public SqlSessionFactory paperPushSystemSqlSessionFactoryBean() throws Exception {
+    @Bean(name = DB_PM+"SqlSessionFactory")
+    public SqlSessionFactory sessionFactoryBean() throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(paperPushSystemDataSource());
-        sqlSessionFactoryBean.setConfiguration(paperPushSystemConfiguration());
+        sqlSessionFactoryBean.setDataSource(dataSource());
+        sqlSessionFactoryBean.setConfiguration(configuration());
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources("classpath*:mapper/"+DB_PPS+"/*.xml"));
+                .getResources("classpath*:mapper/"+DB_PM+"/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean(PPS_TRANSACTION_MANAGER)
-    @Primary
-    public DataSourceTransactionManager paperPushSystemTransactionManager() {
-        return new DataSourceTransactionManager(paperPushSystemDataSource());
+    @Bean(PM_TRANSACTION_MANAGER)
+    public DataSourceTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
     }
 
-
-    @ConditionalOnProperty(name = "spring.datasource.druid.paperpushsystem.url", matchIfMissing = false)
+    @ConditionalOnProperty(name = "spring.datasource.druid.propertymanagement.url", matchIfMissing = false)
     @org.springframework.context.annotation.Configuration
-    @AutoConfigureAfter(name=DB_PPS+"SqlSessionFactory")
+    @AutoConfigureAfter(name = DB_PM+"SqlSessionFactory")
     public static class MyBatisMapperScannerConfigurer {
 
         @Bean
-        public MapperScannerConfigurer paperpushsystemScannerConfigurer() {
-            return scannerConfigurer(DB_PPS);
+        public MapperScannerConfigurer propertymanagementScannerConfigurer() {
+            return scannerConfigurer(DB_PM);
         }
     }
 }

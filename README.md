@@ -192,3 +192,7 @@ turbine:
 
 启动类加上@EnableTurbine注解，启动项目。
 启动hystrix项目，输入turbine项目的id:port/turbine.stream?cluster=default即可。
+
+## 多数据源
+
+[多数据源配置文档](dao-parent/README.md)
