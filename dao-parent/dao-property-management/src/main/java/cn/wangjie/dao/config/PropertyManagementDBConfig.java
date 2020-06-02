@@ -38,6 +38,7 @@ public class PropertyManagementDBConfig extends DataSourceConfigurer {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         sqlSessionFactoryBean.setConfiguration(configuration());
+        setPlugins(sqlSessionFactoryBean);
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath*:mapper/"+DB_PM+"/*.xml"));
         return sqlSessionFactoryBean.getObject();

@@ -1,5 +1,6 @@
 package cn.wangjie.dao.config;
 
+import cn.wangjie.dao.plugin.mybatis.MybatisSqlLoggingInterceptor;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -25,7 +26,8 @@ public class DataSourceConfigurer {
         properties.setProperty("supportMethodsArguments", "true");//支持通过 Mapper 接口参数来传递分页参数
         pageHelper.setProperties(properties);
         //添加插件
-        sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageHelper});
+        MybatisSqlLoggingInterceptor mybatisSqlLoggingInterceptor = new MybatisSqlLoggingInterceptor();
+        sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageHelper,mybatisSqlLoggingInterceptor});
     }
 
     public static MapperScannerConfigurer scannerConfigurer(String db) {

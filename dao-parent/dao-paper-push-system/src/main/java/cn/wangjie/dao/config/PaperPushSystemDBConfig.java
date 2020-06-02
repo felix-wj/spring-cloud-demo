@@ -51,6 +51,7 @@ public class PaperPushSystemDBConfig extends DataSourceConfigurer {
         sqlSessionFactoryBean.setConfiguration(paperPushSystemConfiguration());
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath*:mapper/"+DB_PPS+"/*.xml"));
+        setPlugins(sqlSessionFactoryBean);
         return sqlSessionFactoryBean.getObject();
     }
 

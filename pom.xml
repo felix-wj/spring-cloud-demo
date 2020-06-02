@@ -22,6 +22,7 @@
         <module>websocket</module>
         <module>admin</module>
         <module>dao-parent</module>
+        <module>canal</module>
     </modules>
 
     <parent>
