@@ -19,6 +19,9 @@ public class RedisClusterApplicationTests {
 
     @Test
     public void test(){
+
         redisTemplate.opsForValue().set("test","test");
+        Long ssss = redisTemplate.opsForValue().increment("ssss", 12);
+        System.out.println(ssss);
     }
 }
